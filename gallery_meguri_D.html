@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The ギャラリー巡り — since 2017</title>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@400;500;600&family=Zen+Kaku+Gothic+New:wght@300;400;500&family=EB+Garamond:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --sumi:#2b2320;--beni:#8c2020;--ao:#2e4a3e;
+  --moegi:#4a7c3f;--uguisu:#6b7a2a;--yamabuki:#d4a017;
+  --kinari:#f5f0e6;--shiro:#fdfbf7;--washi:#ede5d0;
+  --usuzumi:#7a6e68;--kawari:#c8b89a;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Zen Kaku Gothic New',sans-serif;background:var(--kinari);color:var(--sumi);-webkit-font-smoothing:antialiased}
+
+/* ── NAV ── */
+nav{
+  position:sticky;top:0;z-index:100;
+  display:flex;align-items:stretch;
+  border-bottom:2px solid var(--sumi);
+  background:var(--shiro);
+  min-height:52px;
+}
+.nav-logo-block{
+  padding:0 20px;border-right:2px solid var(--sumi);
+  display:flex;align-items:center;white-space:nowrap;background:var(--beni);
+  flex-shrink:0;
+}
+.nav-logo{font-family:'Shippori Mincho B1',serif;font-size:14px;font-weight:500;letter-spacing:0.06em;color:var(--shiro)}
+.nav-links{display:flex;flex:1;overflow-x:auto;-webkit-overflow-scrolling:touch}
+.nav-links::-webkit-scrollbar{display:none}
+.nav-links a{
+  display:flex;align-items:center;justify-content:center;
+  padding:0 14px;height:52px;flex-shrink:0;
+  font-size:10px;letter-spacing:0.12em;text-transform:uppercase;
+  color:var(--usuzumi);text-decoration:none;
+  border-right:1px solid var(--kawari);
+  transition:background .15s,color .15s;white-space:nowrap;
+}
+.nav-links a:last-child{border-right:none}
+.nav-links a:hover,.nav-links a:active{background:var(--beni);color:var(--shiro)}
+
+/* ── HERO ── */
+.hero{display:grid;grid-template-columns:1fr 1fr;border-bottom:2px solid var(--sumi)}
+.hero-left{
+  padding:40px 32px;border-right:2px solid var(--sumi);
+  display:flex;flex-direction:column;justify-content:space-between;
+  background:var(--shiro);min-height:360px;
+}
+.hero-tag{
+  display:inline-block;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;
+  background:var(--beni);color:var(--shiro);padding:5px 12px;
+}
+.hero-center{flex:1;display:flex;flex-direction:column;justify-content:center;padding:24px 0}
+.hero-title{
+  font-family:'Shippori Mincho B1',serif;
+  font-size:clamp(28px,4.5vw,60px);
+  font-weight:500;line-height:1.05;color:var(--sumi);white-space:nowrap;
+}
+.hero-title em{font-style:italic;color:var(--beni);font-family:'EB Garamond',serif}
+.hero-since{font-size:10px;letter-spacing:0.28em;text-transform:uppercase;color:var(--usuzumi);margin-top:12px}
+.hero-desc{font-size:13px;line-height:1.9;color:var(--usuzumi);border-top:1px solid var(--kawari);padding-top:16px}
+.hero-right{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr}
+.hstat{
+  padding:24px 20px;border-right:2px solid var(--sumi);border-bottom:2px solid var(--sumi);
+  display:flex;flex-direction:column;justify-content:flex-end;
+}
+.hstat:nth-child(1){background:var(--washi)}
+.hstat:nth-child(2){background:#eef4e0}
+.hstat:nth-child(3){background:#fdf6d4}
+.hstat:nth-child(4){background:var(--washi)}
+.hstat:nth-child(2n){border-right:none}
+.hstat:nth-child(n+3){border-bottom:none}
+.hstat-n{font-family:'Shippori Mincho B1',serif;font-size:clamp(24px,3.5vw,52px);font-weight:500;color:var(--sumi);line-height:1;margin-bottom:4px}
+.hstat-l{font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--usuzumi)}
+
+/* ── SECTION ROW (2col desktop) ── */
+.sec-row{display:grid;grid-template-columns:200px 1fr;border-top:2px solid var(--sumi)}
+.sec-aside{
+  padding:40px 28px 40px 40px;border-right:2px solid var(--sumi);
+  background:var(--washi);display:flex;flex-direction:column;
+}
+.sec-num{font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--moegi);margin-bottom:10px}
+.sec-title{font-family:'Shippori Mincho B1',serif;font-size:26px;font-weight:500;line-height:1.3;color:var(--sumi)}
+.sec-body{padding:40px;background:var(--shiro)}
+
+/* ── FULL SECTIONS ── */
+.full-sec{border-top:2px solid var(--sumi);padding:40px;background:var(--kinari)}
+
+/* ── ABOUT ── */
+.about-quote{
+  font-family:'Shippori Mincho B1',serif;font-size:19px;line-height:1.8;
+  color:var(--sumi);border-left:3px solid var(--beni);padding-left:16px;margin-bottom:22px;
+}
+.about-text{font-size:14px;line-height:2;color:var(--usuzumi);max-width:560px}
+
+/* ── FEATURES ── */
+.features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:26px;background:var(--sumi)}
+.feature-card{background:var(--shiro);padding:28px 24px;position:relative}
+.feature-card:nth-child(1)::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--moegi)}
+.feature-card:nth-child(2)::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--yamabuki)}
+.feature-card:nth-child(3)::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--beni)}
+.feature-num{font-family:'Shippori Mincho B1',serif;font-size:32px;color:var(--kawari);line-height:1;margin-bottom:12px}
+.feature-title{font-size:13px;font-weight:700;color:var(--sumi);margin-bottom:9px;line-height:1.5}
+.feature-body{font-size:13px;line-height:1.9;color:var(--usuzumi)}
+
+/* ── MEMBERS ── */
+.members-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-top:26px;background:var(--sumi)}
+.member{background:var(--shiro);padding:32px;position:relative}
+.member:nth-child(1)::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--beni)}
+.member:nth-child(2)::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--moegi)}
+.m-initial{font-family:'Shippori Mincho B1',serif;font-size:44px;font-weight:400;color:var(--kawari);line-height:1;margin-bottom:12px}
+.m-name{font-family:'Shippori Mincho B1',serif;font-size:20px;font-weight:500;color:var(--sumi)}
+.m-name-en{font-size:11px;color:var(--usuzumi);letter-spacing:0.07em;margin-top:3px;margin-bottom:9px}
+.m-role{font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--beni);border:1px solid var(--beni);padding:3px 9px;display:inline-block;margin-bottom:12px;opacity:0.75}
+.member:nth-child(2) .m-role{color:var(--moegi);border-color:var(--moegi)}
+.m-bio{font-size:13px;line-height:1.9;color:var(--usuzumi)}
+
+/* ── GALLERIES ── */
+.area-head{
+  font-size:10px;letter-spacing:0.14em;text-transform:uppercase;
+  color:var(--shiro);font-weight:500;padding:6px 10px;
+}
+.area-head:not(:first-child){margin-top:20px}
+.area-head.red{background:var(--beni)}
+.area-head.green{background:var(--moegi)}
+.area-head.yellow{background:var(--uguisu)}
+.area-head.dark{background:var(--ao)}
+.area-head.gray{background:var(--usuzumi)}
+.g-row{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:10px 0;border-bottom:1px solid var(--kawari);
+  transition:background .12s,padding-left .12s;cursor:default;
+}
+.g-row:hover{background:var(--washi);padding-left:8px}
+.g-row:last-child{border-bottom:none}
+.g-name{font-size:14px;color:var(--sumi)}
+.g-loc{font-size:10px;color:var(--shiro);background:var(--beni);padding:2px 9px;letter-spacing:0.04em;white-space:nowrap;flex-shrink:0;margin-left:8px}
+.g-loc.gray{background:var(--usuzumi)}
+
+/* ── LOG ── */
+.log-empty{border:2px solid var(--sumi);padding:40px;text-align:center;background:var(--washi)}
+.log-sym{font-family:'Shippori Mincho B1',serif;font-size:36px;color:var(--kawari);margin-bottom:10px}
+.log-msg{font-size:13px;color:var(--usuzumi)}
+
+/* ── SCHEDULE ── */
+.schedule-band{background:var(--sumi);padding:40px;border-top:2px solid var(--sumi)}
+.schedule-band .sec-num{color:var(--moegi)}
+.schedule-band .sec-title{color:var(--kinari);margin-bottom:24px}
+.sched-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--kawari)}
+.sched-card{background:var(--sumi);padding:24px 20px}
+.sched-card:nth-child(1){border-top:3px solid var(--moegi)}
+.sched-card:nth-child(2){border-top:3px solid var(--yamabuki)}
+.sched-card:nth-child(3){border-top:3px solid var(--beni)}
+.sched-mon{font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:var(--kawari);margin-bottom:7px}
+.sched-val{font-size:13px;color:rgba(245,240,230,0.3);font-style:italic}
+
+/* ── FOOTER ── */
+footer{
+  background:var(--sumi);border-top:2px solid var(--beni);
+  padding:18px 32px;display:flex;justify-content:space-between;align-items:center;
+  flex-wrap:wrap;gap:8px;
+}
+.f-logo{font-family:'Shippori Mincho B1',serif;font-size:14px;color:var(--kawari)}
+.f-copy{font-size:11px;color:var(--usuzumi);letter-spacing:0.04em}
+
+/* ── REVEAL ── */
+.reveal{opacity:0;transform:translateY(10px);transition:opacity .55s ease,transform .55s ease}
+.reveal.on{opacity:1;transform:none}
+
+/* ════════════════════════════════
+   RESPONSIVE — TABLET (≤768px)
+════════════════════════════════ */
+@media(max-width:768px){
+  /* hero: stack vertically */
+  .hero{grid-template-columns:1fr}
+  .hero-left{border-right:none;border-bottom:2px solid var(--sumi);min-height:auto;padding:28px 20px}
+  .hero-title{white-space:normal;font-size:clamp(32px,8vw,48px)}
+  .hero-right{grid-template-columns:1fr 1fr}
+  .hstat{padding:20px 16px}
+  .hstat-n{font-size:clamp(28px,7vw,40px)}
+
+  /* section rows: stack */
+  .sec-row{grid-template-columns:1fr}
+  .sec-aside{
+    border-right:none;border-bottom:2px solid var(--sumi);
+    padding:24px 20px;flex-direction:row;align-items:baseline;gap:16px;
+  }
+  .sec-num{margin-bottom:0}
+  .sec-title{font-size:22px}
+  .sec-body{padding:24px 20px}
+
+  /* full sections */
+  .full-sec{padding:28px 20px}
+
+  /* features: 1 col */
+  .features-grid{grid-template-columns:1fr}
+
+  /* members: 1 col */
+  .members-grid{grid-template-columns:1fr}
+
+  /* schedule */
+  .schedule-band{padding:28px 20px}
+  .sched-grid{grid-template-columns:1fr}
+  .sched-card{border-top:none!important;border-left:3px solid}
+  .sched-card:nth-child(1){border-color:var(--moegi)}
+  .sched-card:nth-child(2){border-color:var(--yamabuki)}
+  .sched-card:nth-child(3){border-color:var(--beni)}
+
+  footer{padding:16px 20px}
+}
+
+/* ════════════════════════════════
+   RESPONSIVE — MOBILE (≤480px)
+════════════════════════════════ */
+@media(max-width:480px){
+  .hero-title{font-size:clamp(28px,9vw,38px)}
+  .hero-desc{font-size:12px}
+  .hstat-n{font-size:clamp(24px,8vw,34px)}
+  .hstat-l{font-size:8px}
+  .about-quote{font-size:16px}
+  .m-initial{font-size:36px}
+  .g-name{font-size:13px}
+  .feature-body,.m-bio,.about-text{font-size:13px}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo-block">
+    <span class="nav-logo">The ギャラリー巡り</span>
+  </div>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#features">特徴</a>
+    <a href="#members">Members</a>
+    <a href="#galleries">Galleries</a>
+    <a href="#log">Log</a>
+    <a href="#schedule">Schedule</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-left">
+    <span class="hero-tag">Tokyo · Gallery Circuit</span>
+    <div class="hero-center">
+      <h1 class="hero-title">The <em>ギャラリー巡り</em></h1>
+      <p class="hero-since">Since 2017</p>
+    </div>
+    <p class="hero-desc">田邊真吾と梅澤昌男が毎月一度、東京の現代アートギャラリーを車で巡る活動の記録。アートと金融、師弟ふたりによる東京アート探訪。</p>
+  </div>
+  <div class="hero-right">
+    <div class="hstat"><div class="hstat-n">2017</div><div class="hstat-l">活動開始</div></div>
+    <div class="hstat"><div class="hstat-n">月1回</div><div class="hstat-l">訪問頻度</div></div>
+    <div class="hstat"><div class="hstat-n">2名</div><div class="hstat-l">メンバー</div></div>
+    <div class="hstat"><div class="hstat-n">東京</div><div class="hstat-l">活動拠点</div></div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<div id="about" class="sec-row">
+  <div class="sec-aside reveal">
+    <p class="sec-num">01 — About</p>
+    <h2 class="sec-title">活動の<br>きっかけ</h2>
+  </div>
+  <div class="sec-body reveal">
+    <blockquote class="about-quote">「一緒に回りませんか」<br>—— 田邊真吾、2017年</blockquote>
+    <p class="about-text">梅澤が車を運転できないため、東京各地のギャラリーを気軽に巡ることが難しかった。それを知った田邊が声をかけたのが2017年の始まり。以来、師弟ふたりで毎月一度、東京の現代アートシーンを車で巡り続けている。</p>
+  </div>
+</div>
+
+<!-- FEATURES -->
+<div id="features" class="full-sec">
+  <p class="sec-num reveal">02 — Features</p>
+  <h2 class="sec-title reveal">このギャラリー巡りの特徴</h2>
+  <div class="features-grid">
+    <div class="feature-card reveal">
+      <div class="feature-num">01</div>
+      <div class="feature-title">大手から小規模まで、すべての表現を追う</div>
+      <p class="feature-body">メガギャラリーだけでなく、小規模ギャラリーやポップアップ展にも積極的に足を運ぶ。商業的な文脈の外側にある表現にこそ、次の時代を予感させる何かが宿ると信じているから。</p>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-num">02</div>
+      <div class="feature-title">対話こそが、最良の情報源</div>
+      <p class="feature-body">各ギャラリーのオーナーやスタッフと積極的に言葉を交わし、市場の動向、アーティストの近況、次の展示の気配——数字には現れない生の情報を収集する。</p>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-num">03</div>
+      <div class="feature-title">東京の枠を超え、アートの現場へ</div>
+      <p class="feature-body">横浜トリエンナーレや川村記念美術館など、東京圏外の重要な展示にも積極的に遠征する。現場に赴くことが、本質を掴む唯一の方法だ。</p>
+    </div>
+  </div>
+</div>
+
+<!-- MEMBERS -->
+<div id="members" class="full-sec">
+  <p class="sec-num reveal">03 — Members</p>
+  <h2 class="sec-title reveal">メンバー紹介</h2>
+  <div class="members-grid">
+    <div class="member reveal">
+      <div class="m-initial">田</div>
+      <div class="m-name">田邊 真吾</div>
+      <div class="m-name-en">Shingo Tanabe</div>
+      <div class="m-role">Art Market Specialist · Mentor</div>
+      <p class="m-bio">早稲田大学卒。大手製薬会社を経てシンワオークションへ。2000年代の日本現代アート市場の発展に深く貢献。2021年退社後はワイン専門オークション会社 TopLot の役員として活躍中。</p>
+    </div>
+    <div class="member reveal">
+      <div class="m-initial">梅</div>
+      <div class="m-name">梅澤 昌男</div>
+      <div class="m-name-en">Masao Umezawa</div>
+      <div class="m-role">Art &amp; Finance · Disciple</div>
+      <p class="m-bio">明治学院大学卒。父の不動産会社にて金融資産の管理・提案を担当。田邊との出会いをきっかけに現代アートへ進出。現在は会社の美術品の管理・売買も担当している。</p>
+    </div>
+  </div>
+</div>
+
+<!-- GALLERIES -->
+<div id="galleries" class="sec-row">
+  <div class="sec-aside reveal">
+    <p class="sec-num">04 — Galleries</p>
+    <h2 class="sec-title">主な<br>訪問<br>ギャラリー</h2>
+  </div>
+  <div class="sec-body reveal">
+    <p class="area-head red">六本木・麻布エリア</p>
+    <div class="g-row"><span class="g-name">Taka Ishii Gallery</span><span class="g-loc">六本木</span></div>
+    <div class="g-row"><span class="g-name">Tomio Koyama Gallery</span><span class="g-loc">六本木</span></div>
+    <div class="g-row"><span class="g-name">Fergus McCaffrey Tokyo</span><span class="g-loc">六本木</span></div>
+    <div class="g-row"><span class="g-name">Pace Tokyo</span><span class="g-loc">六本木</span></div>
+    <div class="g-row"><span class="g-name">Perrotin Tokyo</span><span class="g-loc">六本木</span></div>
+    <div class="g-row"><span class="g-name">Wako Works of Art</span><span class="g-loc">六本木</span></div>
+    <div class="g-row"><span class="g-name">Taro Nasu</span><span class="g-loc">六本木</span></div>
+    <div class="g-row"><span class="g-name">Shugo Arts</span><span class="g-loc">六本木</span></div>
+    <p class="area-head green">京橋・銀座・谷中エリア</p>
+    <div class="g-row"><span class="g-name">Taka Ishii Gallery</span><span class="g-loc">京橋</span></div>
+    <div class="g-row"><span class="g-name">Tomio Koyama Gallery</span><span class="g-loc">京橋</span></div>
+    <div class="g-row"><span class="g-name">Gallery Koyanagi</span><span class="g-loc">銀座</span></div>
+    <div class="g-row"><span class="g-name">Ceysson &amp; Bénétière Tokyo</span><span class="g-loc">銀座</span></div>
+    <div class="g-row"><span class="g-name">SCAI The Bathhouse</span><span class="g-loc">谷中</span></div>
+    <p class="area-head yellow">天王洲エリア（TERRADA ART COMPLEX）</p>
+    <div class="g-row"><span class="g-name">Takuro Someya Contemporary Art</span><span class="g-loc">天王洲</span></div>
+    <div class="g-row"><span class="g-name">KOTARO NUKAGA</span><span class="g-loc">天王洲</span></div>
+    <div class="g-row"><span class="g-name">ANOMALY</span><span class="g-loc">天王洲</span></div>
+    <div class="g-row"><span class="g-name">KOSAKU KANECHIKA</span><span class="g-loc">天王洲</span></div>
+    <div class="g-row"><span class="g-name">MAKI Gallery</span><span class="g-loc">天王洲</span></div>
+    <div class="g-row"><span class="g-name">Tomio Koyama Gallery 天王洲</span><span class="g-loc">天王洲</span></div>
+    <p class="area-head dark">表参道・外苑前・清澄エリア</p>
+    <div class="g-row"><span class="g-name">Maho Kubota Gallery</span><span class="g-loc">外苑前</span></div>
+    <div class="g-row"><span class="g-name">GYRE Gallery</span><span class="g-loc">表参道</span></div>
+    <p class="area-head gray">オークション会社（セールプレビュー時）</p>
+    <div class="g-row"><span class="g-name">SBIアートオークション</span><span class="g-loc gray">不定期</span></div>
+    <div class="g-row"><span class="g-name">NEW AUCTION</span><span class="g-loc gray">不定期</span></div>
+    <div class="g-row"><span class="g-name">Phillips Tokyo</span><span class="g-loc gray">不定期</span></div>
+  </div>
+</div>
+
+<!-- LOG -->
+<div id="log" class="sec-row">
+  <div class="sec-aside reveal">
+    <p class="sec-num">05 — Log</p>
+    <h2 class="sec-title">訪問<br>記録</h2>
+  </div>
+  <div class="sec-body reveal">
+    <div class="log-empty">
+      <div class="log-sym">○</div>
+      <p class="log-msg">訪問記録データを受け取り次第、順次掲載予定です</p>
+    </div>
+  </div>
+</div>
+
+<!-- SCHEDULE -->
+<div id="schedule" class="schedule-band">
+  <p class="sec-num">06 — Schedule</p>
+  <h2 class="sec-title reveal">今後の予定</h2>
+  <div class="sched-grid">
+    <div class="sched-card reveal"><div class="sched-mon">May 2026</div><div class="sched-val">調整中</div></div>
+    <div class="sched-card reveal"><div class="sched-mon">Jun 2026</div><div class="sched-val">調整中</div></div>
+    <div class="sched-card reveal"><div class="sched-mon">Jul 2026</div><div class="sched-val">調整中</div></div>
+  </div>
+</div>
+
+<footer>
+  <span class="f-logo">The ギャラリー巡り</span>
+  <span class="f-copy">© 2017–2026 Tanabe &amp; Umezawa · Tokyo</span>
+</footer>
+
+<script>
+const obs = new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('on')}),{threshold:0.08});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
